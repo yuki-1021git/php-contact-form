@@ -1,30 +1,76 @@
 # PHP Contact Form
 
-## 概要
-PHPで実装した3画面構成のお問い合わせフォームです。
+## 📌 Overview
+
+実務を想定して設計した、3画面構成のお問い合わせフォームです。
 
 - 入力画面（index.php）
 - 確認画面（confirm.php）
 - 完了画面（thanks.php）
 
-実務を想定し、セキュリティとUXを意識して実装しました。
+セキュリティとUXを意識し、実案件レベルの実装を行いました。
 
 ---
 
-## 実装機能
+## 🚀 Demo
 
-- バリデーション処理
-- XSS対策（htmlspecialchars）
-- CSRF対策（トークン生成・検証）
-- セッション管理
-- 入力値の保持（戻る機能）
+## Demo
+
+メール送信機能を含むため、
+不正利用防止の観点からデモ環境にはアクセス制限を設定しています。
+閲覧をご希望の際はお知らせください。
+
+
+
+---
+
+## 🛠 Architecture
+
+
+---
+
+## 🔒 Security Implementation
+
+本フォームでは以下の対策を実装しています。
+
+### 1. CSRF対策
+- トークン生成（bin2hex + random_bytes）
+- POST時に検証
+
+### 2. XSS対策
+- 出力時に `htmlspecialchars()` を使用
+
+### 3. メールアドレス検証
+- `filter_var()` による形式チェック
+
+### 4. 二重送信防止
+- セッション破棄処理
+- PRGパターンに近い遷移構造
+
+---
+
+## ✨ UX Improvements
+
+- 入力値の保持（confirm→戻る）
+- エラーメッセージ表示
+- 2カラム確認画面
+- ボタン横並び設計
+- 余白と視認性を意識したUI設計
+
+---
+
+## 📧 Mail Handling
+
 - 管理者通知メール
 - 自動返信メール
-- 迷惑メール対策ヘッダー（Reply-To / MIME / UTF-8）
+- Reply-Toヘッダー設定
+- MIME-Version指定
+- UTF-8対応
+- SPF/DKIM前提構成
 
 ---
 
-## 使用技術
+## 🧰 Tech Stack
 
 - PHP 8.x
 - Bootstrap 4
@@ -33,17 +79,17 @@ PHPで実装した3画面構成のお問い合わせフォームです。
 
 ---
 
-## セキュリティ対策
+## 📈 Future Improvements
 
-- CSRFトークンによる不正送信防止
-- filter_varによるメールアドレス検証
-- htmlspecialcharsによるXSS対策
-- セッション破棄による二重送信防止
+- PHPMailer導入（SMTP化）
+- HTMLメール対応
+- MVC構造へのリファクタリング
+- バリデーションJS対応
+- Docker環境構築
 
 ---
 
-## 改善予定
+## 👨‍💻 Author
 
-- PHPMailerによるSMTP送信対応
-- HTMLメール化
-- MVC構造へのリファクタリング
+Yuki  
+Web制作 / フロントエンド志向  
